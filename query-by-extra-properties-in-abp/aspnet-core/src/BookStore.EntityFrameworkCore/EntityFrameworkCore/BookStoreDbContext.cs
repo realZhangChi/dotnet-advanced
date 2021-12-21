@@ -53,9 +53,7 @@ namespace BookStore.EntityFrameworkCore
         public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
         #endregion
-
-        public DbSet<Book> Books { get; set; }
-
+        
         public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
             : base(options)
         {
@@ -85,12 +83,6 @@ namespace BookStore.EntityFrameworkCore
             //    b.ConfigureByConvention(); //auto configure for the base class props
             //    //...
             //});
-
-            builder.Entity<Book>(b =>
-            {
-                b.ToTable(BookStoreConsts.DbTablePrefix + "Books", BookStoreConsts.DbSchema);
-                b.ConfigureByConvention();
-            });
         }
     }
 }

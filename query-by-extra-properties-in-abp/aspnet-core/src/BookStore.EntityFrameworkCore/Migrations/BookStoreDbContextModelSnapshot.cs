@@ -20,29 +20,6 @@ namespace BookStore.Migrations
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.Sqlite)
                 .HasAnnotation("ProductVersion", "6.0.0");
 
-            modelBuilder.Entity("BookStore.Book", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(40)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppBooks", (string)null);
-                });
-
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
                 {
                     b.Property<Guid>("Id")
@@ -653,6 +630,13 @@ namespace BookStore.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("ExtraProperties");
 
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(8)
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue("");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
@@ -748,6 +732,8 @@ namespace BookStore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Email");
+
+                    b.HasIndex("Gender");
 
                     b.HasIndex("NormalizedEmail");
 

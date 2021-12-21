@@ -259,6 +259,7 @@ namespace BookStore.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
                     AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    Gender = table.Column<string>(type: "TEXT", maxLength: 8, nullable: false, defaultValue: ""),
                     ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -272,20 +273,6 @@ namespace BookStore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AbpUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppBooks",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppBooks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1185,6 +1172,11 @@ namespace BookStore.Migrations
                 column: "Email");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AbpUsers_Gender",
+                table: "AbpUsers",
+                column: "Gender");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AbpUsers_NormalizedEmail",
                 table: "AbpUsers",
                 column: "NormalizedEmail");
@@ -1288,9 +1280,6 @@ namespace BookStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AbpUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "AppBooks");
 
             migrationBuilder.DropTable(
                 name: "IdentityServerApiResourceClaims");

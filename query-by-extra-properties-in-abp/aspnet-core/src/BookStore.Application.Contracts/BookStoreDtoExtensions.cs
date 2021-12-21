@@ -1,4 +1,6 @@
-﻿using Volo.Abp.Identity;
+﻿using System.Globalization;
+
+using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
 
@@ -23,6 +25,8 @@ namespace BookStore
                  * See the documentation for more:
                  * https://docs.abp.io/en/abp/latest/Object-Extensions
                  */
+                ObjectExtensionManager.Instance
+                    .AddOrUpdateProperty<IdentityUserDto, string>("Gender");
             });
         }
     }

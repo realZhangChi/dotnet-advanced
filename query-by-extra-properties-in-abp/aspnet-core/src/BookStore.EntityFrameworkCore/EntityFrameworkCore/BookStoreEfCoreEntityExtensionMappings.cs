@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
@@ -39,6 +40,19 @@ namespace BookStore.EntityFrameworkCore
                  * See the documentation for more:
                  * https://docs.abp.io/en/abp/latest/Customizing-Application-Modules-Extending-Entities
                  */
+                ObjectExtensionManager.Instance
+                    .AddOrUpdateProperty<IdentityUser, string>(
+                        "Gender",
+                        options =>
+                        {
+                            options.MapEfCore((b, p) =>
+                            {
+                                b.HasIndex("Gender");
+                                p.IsRequired().HasDefaultValue(string.Empty);
+                                p.HasMaxLength(8);
+                            });
+                        }
+                    );
             });
         }
     }
